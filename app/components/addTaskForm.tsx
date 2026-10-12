@@ -1,12 +1,15 @@
 'use client'
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
+import { useRouter } from 'next/navigation'
 
 export default function AddTaskForm(){
 
     const [title, setTitle] = useState('')
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+
+    const router = useRouter()
 
     const handleSubmit = async (e: React.SubmitEvent) => {
         e.preventDefault()
@@ -19,14 +22,16 @@ export default function AddTaskForm(){
 
         const { error } = await supabase.from('tasks').insert({ title, user_id: user?.id })
         
-        if (error) setError(error.message)
+        if (error){
+            setError(error.message)
+        } else  router.refresh()
             
         setLoading(false)
         setTitle('')
     }
 
     return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-900 text-zinc-100">
+            // <div className="min-h-screen flex items-center justify-center bg-slate-900 text-zinc-100">
                 <form 
                     className="flex flex-col gap-4 w-full max-w-md p-8 bg-zinc-800"
                     onSubmit={handleSubmit}
@@ -48,6 +53,6 @@ export default function AddTaskForm(){
                     Создать
                         </button>
                 </form>
-            </div>
+            // </div>
     )
 };
