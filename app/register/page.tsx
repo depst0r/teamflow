@@ -29,7 +29,7 @@ export default function Register() {
     }
 
     return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-900 text-zinc-100">
+    <div className="h-screen flex items-center justify-center bg-slate-900 text-zinc-100">
         <form 
             className="flex flex-col gap-4 w-full max-w-md p-8 bg-zinc-800"
             onSubmit={handleSubmit}
