@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import AddTaskForm from "./components/addTaskForm"
+import TaskItem from "./components/taskItem"
 
 export const dynamic = 'force-dynamic'
 
@@ -18,12 +19,11 @@ export default async function Home() {
 return (
   <>
   <AddTaskForm />
-    <main className="p-8">
-      {tasks && tasks.map(task => (
-        <div key={task.id}>
-          <h3>{task.title}</h3>
-        </div>
-      ))}
+    <main className="p-8 flex flex-col items-center">
+    {tasks && tasks.map(task => (
+  <TaskItem key={task.id} task={task} />
+  ))}
+  
     </main>
   </>
 )

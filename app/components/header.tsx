@@ -13,9 +13,9 @@ export default function Header() {
     }
 
     return (
-    <header className='flex gap-5'>
-    <h1>TeamFlow</h1>
-    <button onClick={handleLogout}>Выйти</button>
+    <header className='flex justify-around border-b border-slate-700'>
+    <h1 className='font-bold'>TeamFlow</h1>
+    <button className='cursor-pointer' onClick={handleLogout}>Выйти</button>
     </header>
     )
 }
