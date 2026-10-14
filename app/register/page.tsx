@@ -22,7 +22,7 @@ export default function Register() {
         if (error) {
             setError(error.message)
             } else {
-            console.log('Создан:', data.user)
+            router.push('/')
             }
 
         setLoading(false)
