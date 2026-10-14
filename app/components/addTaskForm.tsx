@@ -39,6 +39,7 @@ export default function AddTaskForm(){
                         {error && <p className="text-red-400">{error}</p>}
                     <h1 className="text-2xl">Новая задача</h1>
                 <input
+                    required
                     type="text"
                     placeholder="Напиши задачу"
                     value={title}
