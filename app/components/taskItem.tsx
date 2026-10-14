@@ -1,5 +1,4 @@
 'use client'
-import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
 
@@ -36,15 +35,25 @@ export default function TaskItem({task} : Props) {
         done: 'bg-green-600',
 }
 
+  const deleteTask = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    const supabase = createClient()
+    await supabase.from('tasks').delete().eq('id', task.id)
+    router.refresh()
+  }
+
 return (
   <div
     onClick={toggleStatus}
     className="flex items-center justify-between gap-4 p-4 mb-2 w-full max-w-md bg-slate-800 rounded cursor-pointer hover:bg-slate-700"
   >
-    <h3 className="text-lg">{task.title}</h3>
+    <h3 className="text-lg flex-1 min-w-0 wrap-break-word">{task.title}</h3>
     <span className={`px-3 py-1 rounded text-sm text-white ${statusColor[task.status]}`}>
       {statusText[task.status]}
     </span>
+      <div className="flex items-center gap-2">
+    <button onClick={deleteTask} className="cursor-pointer text-slate-500 hover:text-red-500 transition-colors text-xl">✕</button>
+  </div>
   </div>
 )
 }
